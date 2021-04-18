@@ -19,7 +19,9 @@ var fs = require('fs')
 var cors = require('cors')
 
 // conect database
-mongoose.connect(config.database,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(config.database,{useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true})
+        .then(() => console.log( 'Database Connected' ))
+        .catch(err => console.log( err ));
 
 var app = express();
 

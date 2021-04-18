@@ -58,8 +58,7 @@ fs.readdirSync('./controllers').forEach(function (controller) {
 app.use(function(req,res){
     res.status(200).send({success: false, msg: 'Route not found.'});
  });
-
-app.set('port', 4000);
+app.set('port',process.env.PORT || 4000);
 // start server
 server.listen(app.get('port'), function(){
     console.log('The App Store server listening on port ' + app.get('port') + ' and NODE_ENV: ' + env);

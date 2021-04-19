@@ -59,7 +59,7 @@ module.exports = function(app,io){
         }
     }
 
-    app.get('/api/login', handleLogin)
+    app.post('/api/login', handleLogin)
     function handleLogin(req, res){
         if(!req.body.email){
             res.status(200).send({

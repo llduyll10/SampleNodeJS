@@ -18,6 +18,17 @@ var fs = require('fs')
 
 var cors = require('cors')
 
+app.use(cors)
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, token"
+  );
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,PATCH");
+  next();
+});
+
 // conect database
 mongoose.connect(config.database,{useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true})
         .then(() => console.log( 'Database Connected' ))
@@ -56,16 +67,7 @@ fs.readdirSync('./controllers').forEach(function (controller) {
   }
 });
 
-app.use(cors)
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, token"
-  );
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,PATCH");
-  next();
-});
+
 
 // handle not found route
 app.use(function(req,res){

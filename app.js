@@ -56,6 +56,16 @@ fs.readdirSync('./controllers').forEach(function (controller) {
   }
 });
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, token"
+  );
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,PATCH");
+  next();
+});
+
 // handle not found route
 app.use(function(req,res){
     res.status(200).send({success: false, msg: 'Route not found.'});
